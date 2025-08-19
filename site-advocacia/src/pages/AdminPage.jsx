@@ -1,7 +1,6 @@
 // src/pages/AdminPage.jsx
-
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Importar o Link
 import { supabase } from "../supabaseClient";
 
 // Componentes filhos que são usados nesta página
@@ -13,7 +12,7 @@ function AdminPage({ session }) {
   const [loading, setLoading] = useState(true);
   const [servicos, setServicos] = useState([]);
 
-  // Função para buscar os serviços do banco de dados, envolvida em useCallback
+  // Função para buscar os serviços do banco de dados
   const getServicos = useCallback(async () => {
     try {
       setLoading(true);
@@ -36,17 +35,26 @@ function AdminPage({ session }) {
     getServicos();
   }, [getServicos]);
 
-  // Função para excluir um serviço pelo seu ID
+  // Função para excluir um serviço (incluindo a imagem do Storage)
   const handleDeleteServico = async (id) => {
     try {
+      // Primeiro, encontrar o serviço para pegar a URL da imagem
+      const servicoParaDeletar = servicos.find((s) => s.id === id);
+      if (servicoParaDeletar && servicoParaDeletar.imagem_url) {
+        const nomeArquivo = servicoParaDeletar.imagem_url.split("/").pop();
+        await supabase.storage
+          .from("imagens-servicos")
+          .remove([`public/${nomeArquivo}`]);
+      }
+
+      // Depois, deletar o registro do serviço no banco de dados
       const { error } = await supabase
         .from("servicos")
         .delete()
-        .match({ id: id }); // Condição para apagar a linha correta
+        .match({ id: id });
 
       if (error) throw error;
 
-      // Atualiza o estado local para remover o serviço da lista sem precisar recarregar a página
       setServicos(servicos.filter((s) => s.id !== id));
       alert("Serviço excluído com sucesso!");
     } catch (error) {
@@ -60,24 +68,34 @@ function AdminPage({ session }) {
     if (error) {
       console.error("Erro ao fazer logout:", error);
     } else {
-      navigate("/"); // Redireciona para a página inicial após o logout
+      navigate("/");
     }
   };
 
-  // Renderização do componente
   return (
     <div>
       <h1>Área Administrativa</h1>
+
+      {/* NAVEGAÇÃO INTERNA DO PAINEL DE ADMIN */}
+      <nav
+        style={{
+          padding: "10px 0",
+          borderBottom: "1px solid #ccc",
+          marginBottom: "20px",
+        }}
+      >
+        <Link to="/admin">Gerenciar Serviços</Link> |{" "}
+        <Link to="/admin/cursos">Gerenciar Cursos</Link>
+      </nav>
+
       <p>Bem-vindo, {session.user.email}!</p>
       <button onClick={handleLogout}>Sair (Logout)</button>
       <hr />
 
-      {/* Componente do formulário para adicionar novos serviços */}
+      <h2>Gerenciamento de Serviços</h2>
       <AddServico onAdd={getServicos} />
       <hr />
 
-      {/* Componente que lista os serviços existentes */}
-      {/* a função de excluir foi passada como uma prop para o componente da lista */}
       <ListaServicos
         servicos={servicos}
         loading={loading}
