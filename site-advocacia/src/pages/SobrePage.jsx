@@ -1,0 +1,21 @@
+// src/pages/SobrePage.jsx
+
+function SobrePage() {
+  return (
+    <div style={{ textAlign: "left", maxWidth: "800px", margin: "0 auto" }}>
+      <h1>O Escritório</h1>
+      <p>
+        Aqui você colocará a história do escritório, a missão, visão e valores.
+        É um espaço para gerar confiança e apresentar a identidade da advogada e
+        de sua equipe.
+      </p>
+      <img
+        src="https://placehold.co/800x400/242424/FFF?text=Foto+do+Escritório"
+        alt="O escritório"
+        style={{ width: "100%", borderRadius: "8px", marginTop: "2rem" }}
+      />
+    </div>
+  );
+}
+
+export default SobrePage;

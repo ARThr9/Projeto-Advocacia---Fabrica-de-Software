@@ -66,7 +66,7 @@ function AdminCursosPage({ session }) {
     <div>
       <h1>Área Administrativa</h1>
       <nav>
-        <Link to="/admin">Gerenciar Cursos</Link> |{" "}
+        <Link to="/admin">Gerenciar Serviços</Link> |{" "}
         <Link to="/admin/cursos">Gerenciar Cursos</Link>
       </nav>
       <p>Bem-vindo, {session.user.email}!</p>

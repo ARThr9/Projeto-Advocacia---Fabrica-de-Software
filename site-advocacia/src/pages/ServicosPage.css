@@ -1,0 +1,107 @@
+/* src/pages/ServicosPage.css */
+
+/* --- Cabeçalho da Página (Banner) --- */
+.page-banner {
+  position: relative; /* Necessário para o overlay funcionar */
+  padding: 4rem 2rem;
+  background-image: url("https://img.freepik.com/vetores-gratis/banner-de-contracao-do-escritorio-de-advocacia-de-luxo-gradiente_23-2149340609.jpg?t=st=1756306774~exp=1756310374~hmac=307867639664cbd4721a9cc2f308ac38c2a48ff3952e27faa21bef5e42180c73&w=1480");
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+  overflow: hidden; /* Garante que o overlay não vaze */
+}
+
+/* A MÁGICA ACONTECE AQUI: O OVERLAY */
+.page-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative; /* Garante que o conteúdo fique acima do overlay */
+  z-index: 2;
+}
+
+.page-banner h1 {
+  color: white;
+  text-align: left;
+  font-size: 3rem;
+}
+
+/* --- Layout Principal de Duas Colunas --- */
+.main-content {
+  display: flex;
+  gap: 2rem;
+}
+
+.servicos-column {
+  flex: 2; /* Faz a coluna de serviços ser mais larga */
+}
+
+.contato-column {
+  flex: 1; /* Faz a coluna de contato ser mais estreita */
+  position: sticky; /* Efeito "grudento" ao rolar */
+  top: 100px; /* Começa a "grudar" 100px abaixo do topo */
+  align-self: flex-start; /* Alinha o item no topo do container flex */
+}
+
+/* --- Grid e Cards de Serviço (Estilo Claro) --- */
+.servicos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas de cards */
+  gap: 1.5rem;
+}
+
+.servico-card-light {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.servico-card-light h3,
+.servico-card-light p {
+  color: #333; /* Texto escuro para o fundo claro */
+}
+
+.servico-card-light h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.saiba-mais-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #d4a017;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column;
+  }
+  .contato-column {
+    position: static; /* Remove o efeito "grudento" em telas menores */
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicos-grid {
+    grid-template-columns: 1fr; /* Uma coluna de cards */
+  }
+}

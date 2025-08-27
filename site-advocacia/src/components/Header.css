@@ -1,0 +1,103 @@
+/* src/components/Header.css */
+
+.main-header {
+  position: fixed; /* Fixa o header no topo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2d2a32; /* Usa a cor do seu tema */
+  border-bottom: 1px solid var(--cor-borda);
+  z-index: 1000; /* Garante que o header fique acima de todo o conteúdo */
+  padding: 0 2rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px; /* Altura do header */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-toggle,
+.search-toggle {
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  cursor: pointer;
+  padding: 0;
+}
+
+.logo-link {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--cor-texto);
+}
+
+.whatsapp-button {
+  background-color: #25d366;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* --- O Menu Overlay --- */
+.overlay-menu {
+  position: fixed;
+  top: 0; /* Começa no topo da tela */
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Ocupa a tela inteira */
+  background-color: var(--cor-menu-overlay); /* Usamos a nova cor */
+  z-index: 999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px; /* Empurra o conteúdo para baixo do header */
+
+  /* Posição inicial: escondido 100% acima da tela */
+  transform: translateY(-100%);
+
+  /* Animação suave para a propriedade 'transform' */
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.overlay-menu.open {
+  /* Posição final: visível na tela (desce para a posição 0) */
+  transform: translateY(0);
+}
+
+.overlay-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.overlay-nav a {
+  color: var(--cor-texto);
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.overlay-nav a:hover {
+  color: var(--cor-primaria);
+}

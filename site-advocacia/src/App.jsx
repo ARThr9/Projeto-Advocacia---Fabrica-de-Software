@@ -1,11 +1,17 @@
 // src/App.jsx
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import "./App.css";
 
-// Importação de todas as páginas
+// Componentes
+import Header from "./components/Header";
+
+// Importação de TODAS as páginas
 import HomePage from "./pages/HomePage";
+import SobrePage from "./pages/SobrePage";
+import ServicosPage from "./pages/ServicosPage";
+import ContatoPage from "./pages/ContatoPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import EditServicoPage from "./pages/EditServicoPage";
@@ -14,49 +20,59 @@ import EditCursoPage from "./pages/EditCursoPage";
 
 function App() {
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true); // Adicionamos um estado de loading
 
   useEffect(() => {
-    // Pega a sessão ativa quando o app carrega
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setSession(session);
-    });
+      setLoading(false); // Finaliza o loading após pegar a sessão inicial
+    };
 
-    // Ouve por mudanças no estado de autenticação (login, logout)
+    fetchSession();
+
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
-    // Limpa a inscrição quando o componente desmonta
     return () => subscription.unsubscribe();
   }, []);
 
+  // Enquanto a sessão inicial está sendo verificada, não renderizamos as rotas
+  // Isso evita um "flash" da página de login antes de redirecionar para o admin
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div className="App">
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{" "}
-        <Link to="/admin">Admin</Link>
-      </nav>
+      <Header />
+
       <main>
         <Routes>
           {/* --- ROTAS PÚBLICAS --- */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/sobre" element={<SobrePage />} />
+          <Route path="/servicos" element={<ServicosPage />} />
+          <Route path="/contato" element={<ContatoPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          {/* --- ROTAS PROTEGIDAS PARA SERVIÇOS --- */}
+          {/* --- ROTAS PROTEGIDAS --- */}
+          {/* Rota principal de Admin (Serviços) */}
           <Route
             path="/admin"
             element={session ? <AdminPage session={session} /> : <LoginPage />}
           />
           <Route
             path="/admin/edit/:id"
-            element={
-              session ? <EditServicoPage session={session} /> : <LoginPage />
-            }
+            element={session ? <EditServicoPage /> : <LoginPage />}
           />
 
-          {/* --- ROTAS PROTEGIDAS PARA CURSOS --- */}
+          {/* Rotas de Admin (Cursos) */}
           <Route
             path="/admin/cursos"
             element={
@@ -65,9 +81,7 @@ function App() {
           />
           <Route
             path="/admin/cursos/edit/:id"
-            element={
-              session ? <EditCursoPage session={session} /> : <LoginPage />
-            }
+            element={session ? <EditCursoPage /> : <LoginPage />}
           />
         </Routes>
       </main>

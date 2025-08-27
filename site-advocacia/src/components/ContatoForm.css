@@ -1,0 +1,45 @@
+/* src/components/ContatoForm.css */
+.form-container {
+  background-color: #3a3a3a; /* Cor de fundo escura, similar à referência */
+  padding: 2rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.form-container h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: none; /* Remove o estilo do App.css */
+  border: none;
+  padding: 0;
+}
+
+.form-container input,
+.form-container textarea {
+  background-color: #555;
+  border: 1px solid #666;
+  color: white;
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+  color: #ccc;
+}
+
+.form-container button {
+  background-color: #d4a017; /* Cor dourada/amarela do botão */
+  color: #1a1a1a;
+  font-weight: bold;
+  border: none;
+}
+
+.form-container button:hover {
+  background-color: #e6b843;
+}

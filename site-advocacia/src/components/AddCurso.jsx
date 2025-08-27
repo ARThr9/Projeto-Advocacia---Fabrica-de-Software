@@ -31,14 +31,14 @@ function AddCurso({ onAdd }) {
       const filePath = `public/${Date.now()}-${imagem.name}`;
 
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("imagens-cursos") // O nome do seu bucket
+        .from("imagens-servicos") // O nome do seu bucket
         .upload(filePath, imagem);
 
       if (uploadError) throw uploadError;
 
       // 2. Obter a URL pública da imagem que acabamos de enviar
       const { data: publicUrlData } = supabase.storage
-        .from("imagens-cursos")
+        .from("imagens-servicos")
         .getPublicUrl(uploadData.path);
 
       const imageUrl = publicUrlData.publicUrl;
