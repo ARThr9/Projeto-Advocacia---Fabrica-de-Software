@@ -77,7 +77,7 @@ function Header() {
           <div className="header-center">
             {/* Adicione seu logo aqui */}
             <Link to="/" className="link-logo">
-              <span className="logo-text">Seu Logo</span>
+              <span className="logo-text">Logo</span>
             </Link>
           </div>
 
