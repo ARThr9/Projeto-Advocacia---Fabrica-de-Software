@@ -1,9 +1,8 @@
-// src/components/Header.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Header.css"; // Criaremos este arquivo de CSS a seguir
+import "./Header.css"; // Este CSS vai funcionar com este JSX
 
-// Componentes SVG para os ícones, para não dependermos de arquivos externos
+// Componentes SVG para os ícones
 const IconeMenu = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -39,23 +38,6 @@ const IconeFechar = () => (
   </svg>
 );
 
-const IconeLupa = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="11" cy="11" r="8"></circle>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-  </svg>
-);
-
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -69,21 +51,23 @@ function Header() {
         <div className="header-content">
           <div className="header-left">
             <button onClick={toggleMenu} className="menu-toggle">
-              {/* O ícone muda dependendo se o menu está aberto ou fechado */}
               {isMenuOpen ? <IconeFechar /> : <IconeMenu />}
             </button>
           </div>
 
           <div className="header-center">
-            {/* Adicione seu logo aqui */}
-            <Link to="/" className="link-logo">
-              <span className="logo-text">Logo</span>
+            <Link to="/" className="logo-link">
+              <img
+                src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Logo%20Advocacia%20Header.jpg"
+                alt="Logo da Advocacia"
+                className="logo-image" /* <<< CORRIGIDO AQUI */
+              />
             </Link>
           </div>
 
           <div className="header-right">
             <a
-              href="https://wa.me/SEUNUMERO"
+              href="https://wa.me/SEUNUMERO" // Lembre-se de colocar o número aqui
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-button"
@@ -104,6 +88,9 @@ function Header() {
           </Link>
           <Link to="/servicos" onClick={toggleMenu}>
             Áreas de Atuação
+          </Link>
+          <Link to="/certificados" onClick={toggleMenu}>
+            Certificados
           </Link>
           <Link to="/contato" onClick={toggleMenu}>
             Fale Conosco

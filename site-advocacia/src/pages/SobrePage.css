@@ -1,0 +1,51 @@
+.sobre-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.sobre-header h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--cor-primaria);
+}
+
+.sobre-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--cor-fundo-card);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .sobre-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.perfil-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--cor-primaria);
+  flex-shrink: 0;
+}
+
+.biografia-text {
+  text-align: left;
+  line-height: 1.7;
+  color: var(--cor-texto-fraco);
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--cor-texto-fraco);
+  padding: 4rem 0;
+}

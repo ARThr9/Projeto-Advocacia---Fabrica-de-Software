@@ -44,7 +44,7 @@ function HomePage() {
         <div className="hero-image">
           {/* Imagem de placeholder. Trocar pela imagem da advogada ou de um escritório */}
           <img
-            src="https://placehold.co/800x600/242424/FFF?text=Advocacia"
+            src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Logo%20Advocacia.jpg"
             alt="Escritório de advocacia"
           />
         </div>

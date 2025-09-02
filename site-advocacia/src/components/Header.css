@@ -1,34 +1,57 @@
 /* src/components/Header.css */
 
 .main-header {
-  position: fixed; /* Fixa o header no topo */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #2d2a32; /* Usa a cor do seu tema */
+  background-color: #242424; /* Cor de fundo escura */
   border-bottom: 1px solid var(--cor-borda);
-  z-index: 1000; /* Garante que o header fique acima de todo o conteúdo */
+  z-index: 1000;
   padding: 0 2rem;
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px; /* Altura do header */
+  justify-content: space-between; /* ESSENCIAL: Distribui o espaço */
+  align-items: center; /* ESSENCIAL: Alinha verticalmente */
+  height: 80px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Define que as seções laterais ocupam o espaço necessário */
 .header-left,
 .header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex: 1;
 }
 
-.menu-toggle,
-.search-toggle {
+/* Garante que o conteúdo da esquerda fique alinhado à esquerda */
+.header-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Garante que o conteúdo da direita fique alinhado à direita */
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilo para a imagem da Logo */
+.logo-image {
+  height: 60px; /* Ajuste este valor se necessário */
+  width: auto;
+  display: block;
+}
+
+/* --- Botões e Links --- */
+.menu-toggle {
   background: none;
   border: none;
   color: var(--cor-texto);
@@ -36,50 +59,38 @@
   padding: 0;
 }
 
-.logo-link {
-  text-decoration: none;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--cor-texto);
-}
-
 .whatsapp-button {
   background-color: #25d366;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.6em 1.2em;
+  border-radius: 50px;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
 }
 
-/* --- O Menu Overlay --- */
+.whatsapp-button:hover {
+  background-color: #128c7e;
+}
+
+/* --- Estilos do Menu Overlay (sem alterações) --- */
 .overlay-menu {
   position: fixed;
-  top: 0; /* Começa no topo da tela */
+  top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* Ocupa a tela inteira */
-  background-color: var(--cor-menu-overlay); /* Usamos a nova cor */
+  height: 100vh;
+  background-color: var(--cor-menu-overlay);
   z-index: 999;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 80px; /* Empurra o conteúdo para baixo do header */
-
-  /* Posição inicial: escondido 100% acima da tela */
+  padding-top: 80px;
   transform: translateY(-100%);
-
-  /* Animação suave para a propriedade 'transform' */
   transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .overlay-menu.open {
-  /* Posição final: visível na tela (desce para a posição 0) */
   transform: translateY(0);
 }
 

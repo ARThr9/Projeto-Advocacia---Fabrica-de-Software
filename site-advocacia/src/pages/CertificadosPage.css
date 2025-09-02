@@ -1,0 +1,51 @@
+.certificados-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.certificados-container h1 {
+  margin-bottom: 0.5rem;
+  color: var(--cor-primaria);
+}
+
+.certificados-subtitle {
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+  color: var(--cor-texto-fraco);
+}
+
+.certificados-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.certificado-item {
+  background-color: var(--cor-fundo-card);
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.certificado-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.certificado-item a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  color: var(--cor-texto);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.pdf-icon {
+  font-size: 1.5rem;
+}
