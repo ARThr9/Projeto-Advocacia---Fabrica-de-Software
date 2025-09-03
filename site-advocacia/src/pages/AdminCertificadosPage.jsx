@@ -105,9 +105,9 @@ function AdminCertificadosPage({ session }) {
     <div>
       <h1>Área Administrativa</h1>
       <nav>
-        <Link to="/admin">Gerenciar Serviços</Link> |
-        <Link to="/admin/sobre">Gerenciar "Sobre"</Link> |
-        <Link to="/admin/certificados">Gerenciar Certificados</Link>
+        <Link to="/admin">Gerenciar Serviços</Link> |{" "}
+        <Link to="/admin/certificados">Gerenciar Certificados</Link> |{" "}
+        <Link to="/admin/sobre">Gerenciar "Sobre"</Link>
       </nav>
       <p>Bem-vindo, {session.user.email}!</p>
       <button onClick={handleLogout}>Sair (Logout)</button>

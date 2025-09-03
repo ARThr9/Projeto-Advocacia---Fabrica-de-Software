@@ -85,7 +85,8 @@ function AdminPage({ session }) {
         }}
       >
         <Link to="/admin">Gerenciar Serviços</Link> |{" "}
-        <Link to="/admin/cursos">Gerenciar Cursos</Link>
+        <Link to="/admin/certificados">Gerenciar Certificados</Link> |{" "}
+        <Link to="/admin/sobre">Gerenciar "Sobre"</Link>
       </nav>
 
       <p>Bem-vindo, {session.user.email}!</p>
