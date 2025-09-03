@@ -67,7 +67,7 @@ function Header() {
 
           <div className="header-right">
             <a
-              href="https://wa.me/SEUNUMERO" // Lembre-se de colocar o número aqui
+              href="https://wa.me/NUMERO" // Lembre-se de colocar o número aqui
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-button"
