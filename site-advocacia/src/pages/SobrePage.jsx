@@ -5,9 +5,8 @@ function SobrePage() {
     <div style={{ textAlign: "left", maxWidth: "800px", margin: "0 auto" }}>
       <h1>O Escritório</h1>
       <p>
-        Aqui você colocará a história do escritório, a missão, visão e valores.
-        É um espaço para gerar confiança e apresentar a identidade da advogada e
-        de sua equipe.
+        Breve história do escritório, missão, etc. É um espaço para gerar
+        confiança e apresentar a identidade da advogada.
       </p>
       <img
         src="https://placehold.co/800x400/242424/FFF?text=Foto+do+Escritório"
