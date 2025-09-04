@@ -2,23 +2,22 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
-// Layout Components (versão antiga)
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header/Header";
+import Footer from "./components/layout/Footer/Footer";
 
 // Public Page Components
-import HomePage from "./pages/HomePage";
-import SobrePage from "./pages/SobrePage";
-import ServicosPage from "./pages/ServicosPage";
-import ContatoPage from "./pages/ContatoPage";
-import LoginPage from "./pages/LoginPage";
-import CertificadosPage from "./pages/CertificadosPage";
+import HomePage from "./pages/Home/HomePage";
+import SobrePage from "./pages/Sobre/SobrePage";
+import ServicosPage from "./pages/Servicos/ServicosPage";
+import ContatoPage from "./pages/Contato/ContatoPage";
+import LoginPage from "./pages/Admin/LoginPage";
+import CertificadosPage from "./pages/Cerfiticados/CertificadosPage";
 
 // Admin Page Components
-import AdminPage from "./pages/AdminPage";
-import EditServicoPage from "./pages/EditServicoPage";
-import AdminSobrePage from "./pages/AdminSobrePage";
-import AdminCertificadosPage from "./pages/AdminCertificadosPage";
+import AdminPage from "./pages/Admin/AdminPage";
+import EditServicoPage from "./pages/Admin/EditServicoPage";
+import AdminSobrePage from "./pages/Admin/AdminSobrePage";
+import AdminCertificadosPage from "./pages/Admin/AdminCertificadosPage";
 
 import "./App.css"; // Depende do seu App.css antigo
 
@@ -39,7 +38,6 @@ function App() {
 
     getSession();
 
-    // Ouve por mudanças no estado de autenticação (login, logout)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -50,7 +48,7 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Efeito para rolar para âncoras (ex: /#contato)
+  // Efeito para rolar para âncoras
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");

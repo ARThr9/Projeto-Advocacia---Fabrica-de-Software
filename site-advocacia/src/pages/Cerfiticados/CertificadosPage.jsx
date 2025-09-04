@@ -61,7 +61,7 @@
 // export default CertificadosPage;
 
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import "./CertificadosPage.css";
 
 function CertificadosPage() {

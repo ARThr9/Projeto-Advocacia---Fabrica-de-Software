@@ -1,7 +1,7 @@
 // src/components/Footer.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Footer.css"; // Criaremos este arquivo a seguir
+import "./Footer.css";
 
 const IconeLinkedIn = () => (
   <svg

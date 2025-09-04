@@ -1,5 +1,5 @@
 // src/pages/ContatoPage.jsx
-import Map from "../components/Map";
+import Map from "../../components/Map";
 
 function ContatoPage() {
   return (

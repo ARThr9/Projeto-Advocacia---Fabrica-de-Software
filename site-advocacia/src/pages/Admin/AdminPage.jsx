@@ -1,11 +1,11 @@
 // src/pages/AdminPage.jsx
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Importar o Link
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 // Componentes filhos que são usados nesta página
-import AddServico from "../components/AddServico";
-import ListaServicos from "../components/ListaServicos";
+import AddServico from "../../components/AddServico";
+import ListaServicos from "../../components/ListaServicos";
 
 function AdminPage({ session }) {
   const navigate = useNavigate();

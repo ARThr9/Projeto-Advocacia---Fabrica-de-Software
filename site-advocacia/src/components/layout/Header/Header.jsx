@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Header.css"; // Este CSS vai funcionar com este JSX
+import "./Header.css";
 
 // Componentes SVG para os ícones
 const IconeMenu = () => (

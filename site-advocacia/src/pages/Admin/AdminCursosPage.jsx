@@ -1,10 +1,10 @@
 // src/pages/AdminCursosPage.jsx
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
-import AddCurso from "../components/AddCurso";
-import ListaCursos from "../components/ListaCursos";
+import AddCurso from "../../components/AddCurso";
+import ListaCursos from "../../components/ListaCursos";
 
 function AdminCursosPage({ session }) {
   const navigate = useNavigate();

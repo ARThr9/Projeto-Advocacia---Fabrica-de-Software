@@ -177,7 +177,7 @@
 // export default AdminCertificadosPage;
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 function AdminCertificadosPage({ session }) {
   const navigate = useNavigate();

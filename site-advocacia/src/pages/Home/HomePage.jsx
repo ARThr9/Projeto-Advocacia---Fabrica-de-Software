@@ -1,6 +1,6 @@
 // src/pages/HomePage.jsx
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import "./HomePage.css";
 
 function HomePage() {
