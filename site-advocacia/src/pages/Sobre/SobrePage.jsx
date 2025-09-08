@@ -4,10 +4,7 @@ function SobrePage() {
   return (
     <div style={{ textAlign: "left", maxWidth: "800px", margin: "0 auto" }}>
       <h1>O Escritório</h1>
-      <p>
-        Breve história do escritório, missão, etc. É um espaço para gerar
-        confiança e apresentar a identidade da advogada.
-      </p>
+      <p>É um espaço para gerar confiança e apresentar a identidade.</p>
       <img
         src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Foto%20Escritorio%20provisoria.png"
         alt="O escritório"
