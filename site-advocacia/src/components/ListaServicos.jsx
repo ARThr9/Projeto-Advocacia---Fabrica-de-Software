@@ -28,8 +28,6 @@ function ListaServicos({ servicos, loading, onDelete }) {
                 paddingBottom: "10px",
               }}
             >
-              {/* Adicionamos a exibição da imagem aqui */}
-              {/* A imagem só é mostrada se a 'imagem_url' existir */}
               {servico.imagem_url && (
                 <img
                   src={servico.imagem_url}

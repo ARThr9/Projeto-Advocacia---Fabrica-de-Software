@@ -9,7 +9,7 @@ function SobrePage() {
         confiança e apresentar a identidade da advogada.
       </p>
       <img
-        src="https://placehold.co/800x400/242424/FFF?text=Foto+do+Escritório"
+        src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Foto%20Escritorio%20provisoria.png"
         alt="O escritório"
         style={{ width: "100%", borderRadius: "8px", marginTop: "2rem" }}
       />

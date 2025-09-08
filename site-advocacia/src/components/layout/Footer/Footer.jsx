@@ -68,10 +68,10 @@ function Footer() {
             Sertãozinho, SP, 12345-678
           </p>
           <p>
-            <strong>Email:</strong> contato@seuemail.com
+            <strong>Email:</strong> silviapereiraadvogados@gmail.com
           </p>
           <p>
-            <strong>Telefone:</strong> (11) 98765-4321
+            <strong>Telefone:</strong> (16) 3945-9066
           </p>
         </div>
 

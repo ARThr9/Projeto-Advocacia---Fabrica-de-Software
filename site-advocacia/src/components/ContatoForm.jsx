@@ -1,57 +1,54 @@
-// src/components/ContatoForm.jsx
-import { useState } from "react";
-import "./ContatoForm.css"; // Criaremos este CSS a seguir
+import React from "react";
+import "./ContatoForm.css";
 
 function ContatoForm() {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [mensagem, setMensagem] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Futuramente, aqui você pode adicionar a lógica para enviar o email
-    alert("Mensagem enviada! (funcionalidade a ser implementada)");
-    // Limpar formulário
-    setNome("");
-    setEmail("");
-    setTelefone("");
-    setMensagem("");
-  };
-
   return (
-    <div className="form-container">
+    <div className="contato-form">
       <h3>Fale com um de nossos especialistas</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="*Nome completo"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="*E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="tel"
-          placeholder="*Telefone"
-          value={telefone}
-          onChange={(e) => setTelefone(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="*Mensagem"
-          rows="4"
-          value={mensagem}
-          onChange={(e) => setMensagem(e.target.value)}
-          required
-        ></textarea>
-        <button type="submit">Enviar</button>
+      <form>
+        <div className="form-group">
+          <label htmlFor="nome">Nome completo</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="*Nome completo"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="*E-mail"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telefone">Telefone</label>
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            placeholder="*Telefone"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mensagem">Mensagem</label>
+          <textarea
+            id="mensagem"
+            name="mensagem"
+            rows="4"
+            placeholder="*Mensagem"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" className="submit-btn">
+          Enviar
+        </button>
       </form>
     </div>
   );

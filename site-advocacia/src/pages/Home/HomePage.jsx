@@ -42,7 +42,6 @@ function HomePage() {
           <button className="hero-button">Entre em Contato</button>
         </div>
         <div className="hero-image">
-          {/* Imagem de placeholder. Trocar pela imagem da advogada ou de um escritório */}
           <img
             src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Logo%20Advocacia.jpg"
             alt="Escritório de advocacia"
@@ -78,7 +77,6 @@ function HomePage() {
         )}
       </section>
 
-      {/* --- Seção Sobre (Placeholder) --- */}
       <section className="sobre-section">
         <div className="sobre-texto">
           <h2>Sobre Nós</h2>

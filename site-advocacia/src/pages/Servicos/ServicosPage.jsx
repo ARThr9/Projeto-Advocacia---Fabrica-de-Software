@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
-import "./ServicosPage.css"; // Usaremos este CSS a seguir
+import "./ServicosPage.css";
 
 function ServicosPage() {
   const [servicos, setServicos] = useState([]);

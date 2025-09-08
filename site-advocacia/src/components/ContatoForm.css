@@ -1,45 +1,85 @@
-/* src/components/ContatoForm.css */
-.form-container {
-  background-color: #3a3a3a; /* Cor de fundo escura, similar à referência */
+.contato-form {
+  background-color: var(--cor-fundo-card);
   padding: 2rem;
   border-radius: 8px;
-  color: white;
+  border: 1px solid var(--cor-borda);
 }
 
-.form-container h3 {
+.contato-form h3 {
+  color: var(--cor-texto);
   text-align: center;
   margin-bottom: 1.5rem;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
-.form-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: none; /* Remove o estilo do App.css */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--cor-texto-fraco);
+  font-size: 0.9rem;
+}
+
+/* ===== A CORREÇÃO PRINCIPAL ESTÁ AQUI ===== */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Garante que padding não afete a largura final */
+}
+
+/* Força uma altura consistente para os inputs */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+  height: 48px; /* Altura explícita - pode ajustar este valor */
+}
+/* ========================================= */
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.3);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
   border: none;
-  padding: 0;
-}
-
-.form-container input,
-.form-container textarea {
-  background-color: #555;
-  border: 1px solid #666;
-  color: white;
-}
-
-.form-container input::placeholder,
-.form-container textarea::placeholder {
-  color: #ccc;
-}
-
-.form-container button {
-  background-color: #d4a017; /* Cor dourada/amarela do botão */
-  color: #1a1a1a;
+  border-radius: 6px;
+  background-color: #d4a017;
+  color: #111;
   font-weight: bold;
-  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.form-container button:hover {
-  background-color: #e6b843;
+.submit-btn:hover {
+  background-color: #e6b825;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+  height: 48px; /* Altura explícita - pode ajustar este valor */
 }
