@@ -1,6 +1,6 @@
-/* src/pages/ServicosPage.css */
+/* Estilos para a nova página de serviços detalhada */
 
-.servicos-page .page-banner {
+.servicos-page-detalhada .page-banner {
   width: 100%;
   padding: 5rem 2rem;
   background-image: url("https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Banner%20Image");
@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.servicos-page .page-banner::before {
+.servicos-page-detalhada .page-banner::before {
   content: "";
   position: absolute;
   top: 0;
@@ -21,100 +21,80 @@
   z-index: 1;
 }
 
-.servicos-page .banner-content {
+.servicos-page-detalhada .banner-content {
   position: relative;
   z-index: 2;
+  color: white;
 }
 
-.servicos-page .page-banner h1 {
-  color: white;
+.servicos-page-detalhada .banner-content h1 {
   font-size: 3rem;
-  font-weight: bold;
-}
-
-/* Container para centralizar o conteúdo da grelha */
-.servicos-page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-}
-
-/* A grelha dos cartões */
-.servicos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas em ecrãs grandes */
-  gap: 2rem;
-}
-
-/* Estilo do cartão (tema escuro) */
-.servico-card {
-  background-color: var(--cor-fundo-card);
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.servico-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.servico-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.servico-card-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1; /* Faz esta área crescer para ocupar o espaço disponível */
-}
-
-.servico-card h3 {
-  font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--cor-texto);
 }
 
-.servico-card p {
+.servicos-page-detalhada .banner-content p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.servicos-detalhe-container {
+  max-width: 1400px; /* ALTERADO: Aumentamos de 1000px para 1200px */
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.servico-detalhe-item {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+/* Efeito de alternar lado da imagem */
+.servico-detalhe-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.servico-detalhe-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.servico-detalhe-imagem {
+  flex: 1;
+  min-width: 300px;
+}
+
+.servico-detalhe-imagem img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.servico-detalhe-texto {
+  flex: 1.5;
+}
+
+.servico-detalhe-texto h2 {
+  font-size: 2rem;
+  color: var(--cor-primaria);
+  margin-bottom: 1rem;
+}
+
+.servico-detalhe-texto p {
+  line-height: 1.8;
   color: var(--cor-texto-fraco);
-  flex-grow: 1; /* Faz o parágrafo crescer, empurrando o botão para baixo */
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
-.saiba-mais-btn {
-  display: inline-block;
-  background-color: var(--cor-primaria);
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  text-align: center;
-  align-self: flex-start; /* Alinha o botão à esquerda */
-  margin-top: auto; /* Empurra o botão para o fundo do cartão */
-  transition: background-color 0.2s;
-}
-
-.saiba-mais-btn:hover {
-  background-color: #535bf2;
-}
-
-/* --- Responsividade --- */
-@media (max-width: 1024px) {
-  .servicos-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
-  }
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-  .servicos-grid {
-    grid-template-columns: 1fr; /* 1 coluna para telemóveis */
+  .servico-detalhe-item,
+  .servico-detalhe-item:nth-child(even) {
+    flex-direction: column;
   }
 }

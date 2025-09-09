@@ -84,13 +84,13 @@ function Header() {
             Home
           </Link>
           <Link to="/sobre" onClick={toggleMenu}>
-            O Escritório
+            Sobre nós
           </Link>
           <Link to="/servicos" onClick={toggleMenu}>
             Áreas de Atuação
           </Link>
           <Link to="/certificados" onClick={toggleMenu}>
-            Certificados
+            Certificações
           </Link>
           <Link to="/contato" onClick={toggleMenu}>
             Fale Conosco

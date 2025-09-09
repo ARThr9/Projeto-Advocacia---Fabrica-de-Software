@@ -1,15 +1,61 @@
-// src/pages/SobrePage.jsx
+import { useState, useEffect } from "react";
+import { supabase } from "../../supabaseClient"; // Verifique se o caminho está correto
+import "./SobrePage.css";
 
 function SobrePage() {
+  const [blocos, setBlocos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getBlocos() {
+      try {
+        setLoading(true);
+        // AGORA BUSCAMOS DA NOVA TABELA 'conteudo_sobre'
+        const { data, error } = await supabase
+          .from("conteudo_sobre")
+          .select("*")
+          .order("ordem", { ascending: true }); // Puxa os blocos na ordem correta
+
+        if (error) throw error;
+        if (data) setBlocos(data);
+      } catch (error) {
+        console.warn(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getBlocos();
+  }, []);
+
   return (
-    <div style={{ textAlign: "left", maxWidth: "800px", margin: "0 auto" }}>
-      <h1>O Escritório</h1>
-      <p>É um espaço para gerar confiança e apresentar a identidade.</p>
-      <img
-        src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Foto%20Escritorio%20provisoria.png"
-        alt="O escritório"
-        style={{ width: "100%", borderRadius: "8px", marginTop: "2rem" }}
-      />
+    <div className="sobre-page-container">
+      {loading ? (
+        <p className="loading-message">Carregando...</p>
+      ) : // Se não houver blocos, mostra uma mensagem
+      blocos.length === 0 ? (
+        <p className="loading-message">
+          Nenhum conteúdo cadastrado para esta página ainda.
+        </p>
+      ) : (
+        // Mapeia e exibe cada bloco de conteúdo
+        blocos.map((bloco) => (
+          <section key={bloco.id} className="sobre-bloco-item">
+            {bloco.imagem_url && (
+              <div className="sobre-bloco-imagem">
+                <img src={bloco.imagem_url} alt={bloco.titulo} />
+              </div>
+            )}
+            <div className="sobre-bloco-texto">
+              <h2>{bloco.titulo}</h2>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: bloco.texto.replace(/\n/g, "<br />"),
+                }}
+              />
+            </div>
+          </section>
+        ))
+      )}
     </div>
   );
 }

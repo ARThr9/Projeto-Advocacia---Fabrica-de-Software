@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { supabase } from "./supabaseClient";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
@@ -11,7 +12,7 @@ import SobrePage from "./pages/Sobre/SobrePage";
 import ServicosPage from "./pages/Servicos/ServicosPage";
 import ContatoPage from "./pages/Contato/ContatoPage";
 import LoginPage from "./pages/Admin/LoginPage";
-import CertificadosPage from "./pages/Cerfiticados/CertificadosPage";
+import CertificadosPage from "./pages/Certificados/CertificadosPage";
 
 // Admin Page Components
 import AdminPage from "./pages/Admin/AdminPage";
@@ -19,7 +20,7 @@ import EditServicoPage from "./pages/Admin/EditServicoPage";
 import AdminSobrePage from "./pages/Admin/AdminSobrePage";
 import AdminCertificadosPage from "./pages/Admin/AdminCertificadosPage";
 
-import "./App.css"; // Depende do seu App.css antigo
+import "./App.css";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -27,7 +28,6 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Verifica a sessão ativa quando o app carrega
     const getSession = async () => {
       const {
         data: { session },
@@ -35,7 +35,6 @@ function App() {
       setSession(session);
       setLoading(false);
     };
-
     getSession();
 
     const {
@@ -44,11 +43,9 @@ function App() {
       setSession(session);
     });
 
-    // Limpa a inscrição quando o componente é desmontado
     return () => subscription.unsubscribe();
   }, []);
 
-  // Efeito para rolar para âncoras
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -57,11 +54,9 @@ function App() {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [location]); // Roda sempre que a localização mudar
+  }, [location]);
 
-  // Mostra um indicador de carregamento enquanto a sessão é verificada
   if (loading) {
-    // Você pode querer criar uma classe para isso no seu App.css
     return (
       <div
         style={{ textAlign: "center", marginTop: "5rem", fontSize: "1.5rem" }}
@@ -73,10 +68,9 @@ function App() {
 
   return (
     <div className="App">
-      {" "}
-      {/* Usa a classe de container principal do seu CSS antigo */}
       <Header />
       <main>
+        <ScrollToTop />
         <Routes>
           {/* --- Rotas Públicas --- */}
           <Route path="/" element={<HomePage />} />

@@ -78,10 +78,14 @@ function Footer() {
         <div className="footer-column">
           <h3>Redes Sociais</h3>
           <div className="social-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            {/* <a href="#" target="_blank" rel="noopener noreferrer">
               <IconeLinkedIn />
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            </a> */}
+            <a
+              href="https://www.instagram.com/dra.silviapereira/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <IconeInstagram />
             </a>
           </div>

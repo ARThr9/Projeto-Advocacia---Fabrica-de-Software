@@ -1,4 +1,3 @@
-// src/pages/EditServicoPage.jsx
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
@@ -11,10 +10,10 @@ function EditServicoPage() {
   const [updating, setUpdating] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [imagemUrlAtual, setImagemUrlAtual] = useState(null); // URL da imagem que já existe
-  const [novaImagem, setNovaImagem] = useState(null); // Novo arquivo de imagem selecionado
+  const [descricaoDetalhada, setDescricaoDetalhada] = useState("");
+  const [imagemUrlAtual, setImagemUrlAtual] = useState(null);
+  const [novaImagem, setNovaImagem] = useState(null);
 
-  // Função para buscar os dados do serviço específico
   const getServico = useCallback(async () => {
     try {
       setLoading(true);
@@ -29,7 +28,8 @@ function EditServicoPage() {
       if (data) {
         setTitulo(data.titulo);
         setDescricao(data.descricao);
-        setImagemUrlAtual(data.imagem_url); // Guardamos a URL da imagem atual
+        setDescricaoDetalhada(data.descricao_detalhada || "");
+        setImagemUrlAtual(data.imagem_url);
       }
     } catch (error) {
       alert(error.message);
@@ -42,53 +42,43 @@ function EditServicoPage() {
     getServico();
   }, [getServico]);
 
-  // Função para lidar com a seleção da nova imagem
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setNovaImagem(e.target.files[0]);
     }
   };
 
-  // Função principal para salvar as atualizações
   async function handleUpdateServico(e) {
     e.preventDefault();
     try {
       setUpdating(true);
-      let imageUrl = imagemUrlAtual; // Começa com a URL que já existia
+      let imageUrl = imagemUrlAtual;
 
-      // CENÁRIO: O usuário selecionou uma NOVA imagem para upload
       if (novaImagem) {
-        // 1. Deletar a imagem antiga do Storage, se ela existir
         if (imagemUrlAtual) {
-          const nomeArquivoAntigo = imagemUrlAtual.split("/").pop(); // Pega o nome do arquivo da URL
+          const nomeArquivoAntigo = imagemUrlAtual.split("/").pop();
           await supabase.storage
             .from("imagens-servicos")
             .remove([`public/${nomeArquivoAntigo}`]);
         }
-
-        // 2. Fazer o upload da NOVA imagem
         const filePath = `public/${Date.now()}-${novaImagem.name}`;
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from("imagens-servicos")
           .upload(filePath, novaImagem);
-
         if (uploadError) throw uploadError;
-
-        // 3. Obter a URL pública da nova imagem
         const { data: publicUrlData } = supabase.storage
           .from("imagens-servicos")
           .getPublicUrl(uploadData.path);
-
-        imageUrl = publicUrlData.publicUrl; // Atualiza a variável imageUrl com a nova URL
+        imageUrl = publicUrlData.publicUrl;
       }
 
-      // 4. Atualizar os dados no banco de dados (texto e a nova URL da imagem, se houver)
       const { error: updateError } = await supabase
         .from("servicos")
         .update({
           titulo: titulo,
           descricao: descricao,
-          imagem_url: imageUrl, // Salva a URL nova ou a antiga, dependendo do que aconteceu
+          descricao_detalhada: descricaoDetalhada,
+          imagem_url: imageUrl,
         })
         .eq("id", id);
 
@@ -108,14 +98,17 @@ function EditServicoPage() {
   return (
     <div>
       <h1>Editando Serviço</h1>
-      {/* Mostra uma prévia da imagem atual, se ela existir */}
       {imagemUrlAtual && (
         <div>
           <p>Imagem Atual:</p>
           <img
             src={imagemUrlAtual}
             alt="Imagem atual do serviço"
-            style={{ width: "200px", marginBottom: "20px" }}
+            style={{
+              width: "200px",
+              marginBottom: "20px",
+              borderRadius: "8px",
+            }}
           />
         </div>
       )}
@@ -128,14 +121,26 @@ function EditServicoPage() {
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
         />
-        <br />
-        <label htmlFor="descricao">Descrição</label>
+
+        <label htmlFor="descricao">Descrição Curta (para a Homepage)</label>
         <textarea
           id="descricao"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
+          rows="3"
         />
-        <br />
+
+        {/* 4. NOVO CAMPO ADICIONADO AO FORMULÁRIO */}
+        <label htmlFor="descricaoDetalhada">
+          Descrição Detalhada (para a página de Áreas de Atuação)
+        </label>
+        <textarea
+          id="descricaoDetalhada"
+          value={descricaoDetalhada}
+          onChange={(e) => setDescricaoDetalhada(e.target.value)}
+          rows="10"
+        />
+
         <label htmlFor="imagem-input">Trocar Imagem:</label>
         <input
           type="file"
@@ -143,7 +148,7 @@ function EditServicoPage() {
           accept="image/*"
           onChange={handleImageChange}
         />
-        <br />
+
         <button type="submit" disabled={updating}>
           {updating ? "Salvando..." : "Salvar Alterações"}
         </button>

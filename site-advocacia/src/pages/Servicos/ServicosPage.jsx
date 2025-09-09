@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../supabaseClient"; // Corrigido o caminho do import
+import { Link } from "react-router-dom";
 import "./ServicosPage.css";
 
 function ServicosPage() {
@@ -10,6 +11,7 @@ function ServicosPage() {
     async function getServicos() {
       try {
         setLoading(true);
+        // A busca de dados já está correta, pois o select('*') pega todas as colunas
         const { data, error } = await supabase
           .from("servicos")
           .select("*")
@@ -26,32 +28,41 @@ function ServicosPage() {
   }, []);
 
   return (
-    <div className="servicos-page">
+    <div className="servicos-page-detalhada">
       <div className="page-banner">
         <div className="banner-content">
           <h1>Áreas de Atuação</h1>
+          <p>
+            Conheça em detalhe as nossas especialidades e como podemos ajudar.
+          </p>
         </div>
       </div>
 
-      <div className="servicos-page-container">
+      <div className="servicos-detalhe-container">
         {loading ? (
-          <p>Carregando serviços...</p>
+          <p>Carregando...</p>
         ) : (
-          <div className="servicos-grid">
+          <div className="servicos-detalhe-lista">
             {servicos.map((servico) => (
-              <div key={servico.id} className="servico-card">
-                <img
-                  src={
-                    servico.imagem_url ||
-                    "https://placehold.co/400x250/242424/FFF?text=Serviço"
-                  }
-                  alt={servico.titulo}
-                />
-                <div className="servico-card-content">
-                  <h3>{servico.titulo}</h3>
-                  <p>{servico.descricao}</p>
+              <section key={servico.id} className="servico-detalhe-item">
+                <div className="servico-detalhe-imagem">
+                  <img src={servico.imagem_url} alt={servico.titulo} />
                 </div>
-              </div>
+                <div className="servico-detalhe-texto">
+                  <h2>{servico.titulo}</h2>
+                  {/* ALTERAÇÃO PRINCIPAL AQUI: Usamos a descrição detalhada */}
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: (
+                        servico.descricao_detalhada || servico.descricao
+                      ).replace(/\n/g, "<br />"),
+                    }}
+                  />
+                  <Link to="/contato" className="hero-button">
+                    Agendar Consulta
+                  </Link>
+                </div>
+              </section>
             ))}
           </div>
         )}

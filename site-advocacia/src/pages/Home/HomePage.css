@@ -27,10 +27,24 @@
 }
 
 .hero-button {
-  padding: 1em 2.5em;
-  font-size: 1.1em;
+  display: inline-block;
+  padding: 0.8rem 2.5rem;
   background-color: var(--cor-primaria);
+  color: white;
+  text-decoration: none;
   border: none;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-button:hover {
+  background-color: #535bf2;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .hero-image {
@@ -75,6 +89,9 @@
   overflow: hidden;
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Adicionado para o alinhamento do botão */
+  display: flex;
+  flex-direction: column;
 }
 
 .servico-card:hover {
@@ -90,6 +107,10 @@
 
 .servico-card-content {
   padding: 1.5rem;
+  /* Adicionado para o alinhamento do botão */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .servico-card-content h3 {
@@ -100,13 +121,38 @@
 .servico-card-content p {
   color: var(--cor-texto-fraco);
   margin-bottom: 1rem;
+
+  flex-grow: 1;
 }
 
 .servico-card-content a {
-  color: var(--cor-primaria);
+  /* Estilo do botão */
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+  text-align: center;
+
+  /* Animação */
+  transition: all 0.3s ease;
+
+  /* Estado inicial (botão preenchido e sempre visível) */
+  background-color: var(--cor-primaria);
+  color: white; /* Texto branco e visível */
+
+  /* Alinhamento no fundo do card */
+  margin-top: auto;
+  align-self: flex-start;
 }
+
+.servico-card-content a:hover {
+  /* Efeito ao passar o mouse */
+  background-color: #535bf2; /* Um pouco mais escuro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+/* ======================================= */
 
 /* --- Seção Sobre --- */
 .sobre-section {
@@ -129,7 +175,7 @@
   font-size: 2.5em;
 }
 
-/*  Responsividade para telas menores */
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .hero-section {
     flex-direction: column;

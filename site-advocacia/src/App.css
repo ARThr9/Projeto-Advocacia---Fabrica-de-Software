@@ -2,15 +2,13 @@
 
 /* --- Layout Principal --- */
 .App {
-  max-width: 1800px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 main {
-  margin-top: 2rem;
   padding-top: 80px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 hr {
@@ -19,10 +17,9 @@ hr {
   margin: 2rem 0;
 }
 
-/* --- Navegação --- */
+/* --- Navegação (Menu de Admin) --- */
 nav {
   padding: 1rem 0;
-  border-bottom: 1px solid var(--cor-borda);
   margin-bottom: 1rem;
 }
 
@@ -38,7 +35,7 @@ nav a:hover {
   color: #8c92ff;
 }
 
-/* --- Títulos --- */
+/* --- Títulos (Painel de Admin) --- */
 h1 {
   font-size: 2.5em;
   line-height: 1.1;
@@ -53,7 +50,7 @@ h2 {
   text-align: left;
 }
 
-/* --- Botões --- */
+/* --- Botões (Geral/Admin) --- */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -76,7 +73,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* --- Formulários --- */
+/* --- Estilos para Formulários (Painel de Admin) --- */
 form {
   display: flex;
   flex-direction: column;
@@ -88,14 +85,34 @@ form {
   text-align: left;
 }
 
-form label {
-  font-weight: 500;
+.form-group {
+  margin-bottom: 0.5rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
+/* Estilo para colocar campos lado a lado */
+.form-group-inline {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.form-group-inline .form-group {
+  flex: 1;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--cor-texto-fraco);
+  font-size: 0.9rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form textarea {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid var(--cor-borda);
@@ -104,15 +121,18 @@ textarea {
   border-radius: 6px;
   font-family: inherit;
   font-size: 1em;
+  box-sizing: border-box; /* Garante consistência no tamanho */
 }
 
-input[type="file"] {
+form input[type="file"] {
   padding: 0.5rem;
   border: 1px solid var(--cor-borda);
   border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* --- Listas e Cards (Admin) --- */
+/* --- Listas e Cards (Painel de Admin) --- */
 ul {
   list-style: none;
   padding: 0;

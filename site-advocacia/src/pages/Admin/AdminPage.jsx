@@ -1,9 +1,6 @@
-// src/pages/AdminPage.jsx
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Importar o Link
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
-
-// Componentes filhos que são usados nesta página
 import AddServico from "../../components/AddServico";
 import ListaServicos from "../../components/ListaServicos";
 
@@ -12,7 +9,12 @@ function AdminPage({ session }) {
   const [loading, setLoading] = useState(true);
   const [servicos, setServicos] = useState([]);
 
-  // Função para buscar os serviços do banco de dados
+  const [uploading, setUploading] = useState(false);
+  const [titulo, setTitulo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [descricaoDetalhada, setDescricaoDetalhada] = useState(""); // NOVO ESTADO
+  const [imagem, setImagem] = useState(null);
+
   const getServicos = useCallback(async () => {
     try {
       setLoading(true);
@@ -24,79 +26,147 @@ function AdminPage({ session }) {
       if (error) throw error;
       if (data) setServicos(data);
     } catch (error) {
-      alert(error.error_description || error.message);
+      alert(error.message);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  // useEffect que roda a função getServicos uma vez quando a página carrega
   useEffect(() => {
     getServicos();
   }, [getServicos]);
 
-  // Função para excluir um serviço (incluindo a imagem do Storage)
-  const handleDeleteServico = async (id) => {
-    try {
-      // Primeiro, encontrar o serviço para pegar a URL da imagem
-      const servicoParaDeletar = servicos.find((s) => s.id === id);
-      if (servicoParaDeletar && servicoParaDeletar.imagem_url) {
-        const nomeArquivo = servicoParaDeletar.imagem_url.split("/").pop();
-        await supabase.storage
-          .from("imagens-servicos")
-          .remove([`public/${nomeArquivo}`]);
-      }
-
-      // Depois, deletar o registro do serviço no banco de dados
-      const { error } = await supabase
-        .from("servicos")
-        .delete()
-        .match({ id: id });
-
-      if (error) throw error;
-
-      setServicos(servicos.filter((s) => s.id !== id));
-      alert("Serviço excluído com sucesso!");
-    } catch (error) {
-      alert(error.error_description || error.message);
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImagem(e.target.files[0]);
     }
   };
 
-  // Função para fazer o logout do usuário
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error("Erro ao fazer logout:", error);
-    } else {
-      navigate("/");
+  const handleAddServico = async (e) => {
+    e.preventDefault();
+    if (!imagem) {
+      alert("Por favor, selecione uma imagem.");
+      return;
     }
+    try {
+      setUploading(true);
+      const filePath = `public/${Date.now()}-${imagem.name}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("imagens-servicos")
+        .upload(filePath, imagem);
+      if (uploadError) throw uploadError;
+      const { data: publicUrlData } = supabase.storage
+        .from("imagens-servicos")
+        .getPublicUrl(uploadData.path);
+      const imageUrl = publicUrlData.publicUrl;
+
+      const { error: insertError } = await supabase.from("servicos").insert([
+        {
+          titulo: titulo,
+          descricao: descricao,
+          descricao_detalhada: descricaoDetalhada,
+          imagem_url: imageUrl,
+        },
+      ]);
+      if (insertError) throw insertError;
+
+      alert("Serviço adicionado com sucesso!");
+      // Limpar todos os campos
+      setTitulo("");
+      setDescricao("");
+      setDescricaoDetalhada("");
+      setImagem(null);
+      document.getElementById("imagem-input-add").value = "";
+      getServicos();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteServico = async (id, imageUrl) => {
+    if (window.confirm("Tem certeza que deseja excluir este serviço?")) {
+      try {
+        if (imageUrl) {
+          const nomeArquivo = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+          await supabase.storage
+            .from("imagens-servicos")
+            .remove([`public/${nomeArquivo}`]);
+        }
+        await supabase.from("servicos").delete().match({ id });
+        setServicos(servicos.filter((s) => s.id !== id));
+        alert("Serviço excluído com sucesso!");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
   };
 
   return (
     <div>
       <h1>Área Administrativa</h1>
-
-      {/* NAVEGAÇÃO INTERNA DO PAINEL DE ADMIN */}
-      <nav
-        style={{
-          padding: "10px 0",
-          borderBottom: "1px solid #ccc",
-          marginBottom: "20px",
-        }}
-      >
+      <nav>
         <Link to="/admin">Gerenciar Serviços</Link> |{" "}
-        <Link to="/admin/certificados">Gerenciar Certificados</Link> |{" "}
+        <Link to="/admin/certificados">Gerenciar Certificações</Link> |{" "}
         <Link to="/admin/sobre">Gerenciar "Sobre"</Link>
       </nav>
-
       <p>Bem-vindo, {session.user.email}!</p>
       <button onClick={handleLogout}>Sair (Logout)</button>
       <hr />
 
-      <h2>Gerenciamento de Serviços</h2>
-      <AddServico onAdd={getServicos} />
+      <form onSubmit={handleAddServico}>
+        <h2>Adicionar Novo Serviço</h2>
+        <label htmlFor="titulo-add">Título do Serviço</label>
+        <input
+          id="titulo-add"
+          type="text"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+          required
+        />
+
+        <label htmlFor="descricao-add">Descrição Curta (para Homepage)</label>
+        <textarea
+          id="descricao-add"
+          value={descricao}
+          onChange={(e) => setDescricao(e.target.value)}
+          required
+          rows="3"
+        />
+
+        <label htmlFor="descricao-detalhada-add">
+          Descrição Detalhada (para página de Áreas de Atuação)
+        </label>
+        <textarea
+          id="descricao-detalhada-add"
+          value={descricaoDetalhada}
+          onChange={(e) => setDescricaoDetalhada(e.target.value)}
+          required
+          rows="7"
+        />
+
+        <label htmlFor="imagem-input-add">Imagem</label>
+        <input
+          type="file"
+          id="imagem-input-add"
+          accept="image/*"
+          onChange={handleImageChange}
+          required
+        />
+
+        <button type="submit" disabled={uploading}>
+          {uploading ? "Salvando..." : "Salvar Serviço"}
+        </button>
+      </form>
       <hr />
 
+      {/* <h2>Serviços Prestados</h2> */}
       <ListaServicos
         servicos={servicos}
         loading={loading}

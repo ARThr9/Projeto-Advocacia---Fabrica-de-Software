@@ -13,26 +13,23 @@
 
 .header-content {
   display: flex;
-  justify-content: space-between; /* ESSENCIAL: Distribui o espaço */
-  align-items: center; /* ESSENCIAL: Alinha verticalmente */
+  justify-content: space-between;
+  align-items: center;
   height: 80px;
   max-width: 1750px;
   margin: 0 auto;
 }
 
-/* Define que as seções laterais ocupam o espaço necessário */
 .header-left,
 .header-right {
   flex: 1;
 }
 
-/* Garante que o conteúdo da esquerda fique alinhado à esquerda */
 .header-left {
   display: flex;
   justify-content: flex-start;
 }
 
-/* Garante que o conteúdo da direita fique alinhado à direita */
 .header-right {
   display: flex;
   justify-content: flex-end;
@@ -45,7 +42,7 @@
 
 /* Estilo para a imagem da Logo */
 .logo-image {
-  height: 60px; /* Ajuste este valor se necessário */
+  height: 60px;
   width: auto;
   display: block;
 }
@@ -57,6 +54,14 @@
   color: var(--cor-texto);
   cursor: pointer;
   padding: 0;
+
+  outline: none;
+
+  transition: transform 0.2s ease;
+}
+
+.menu-toggle:hover {
+  transform: translateY(-2px);
 }
 
 .whatsapp-button {
