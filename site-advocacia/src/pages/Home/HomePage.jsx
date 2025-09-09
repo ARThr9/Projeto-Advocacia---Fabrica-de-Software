@@ -5,14 +5,14 @@ import "./HomePage.css";
 
 function HomePage() {
   const [servicos, setServicos] = useState([]);
-  const [sobre, setSobre] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
       try {
         setLoading(true);
-        // Buscar serviços
+        // Agora buscamos apenas os serviços
         const { data: servicosData, error: servicosError } = await supabase
           .from("servicos")
           .select("*")
@@ -21,17 +21,6 @@ function HomePage() {
 
         if (servicosError) throw servicosError;
         if (servicosData) setServicos(servicosData);
-
-        const { data: sobreData, error: sobreError } = await supabase
-          .from("conteudo_sobre") // Nome da nova tabela
-          .select("*")
-          .order("ordem", { ascending: true }) // Ordena pela ordem definida
-          .limit(1) // Pega apenas o primeiro bloco
-          .single(); // Converte o resultado de um array para um único objeto
-
-        if (sobreError) throw sobreError;
-        if (sobreData) setSobre(sobreData);
-        // ===================================
       } catch (error) {
         console.warn("Aviso ao buscar dados da homepage:", error.message);
       } finally {
@@ -92,24 +81,6 @@ function HomePage() {
           </div>
         )}
       </section>
-
-      {/* --- Seção Sobre Nós (Dinâmica e Corrigida) --- */}
-      {/* O 'sobre' agora vem da nova tabela, então as propriedades mudaram */}
-      {sobre && (
-        <section className="sobre-section">
-          <div className="sobre-imagem">
-            <img src={sobre.imagem_url} alt={sobre.titulo} />
-          </div>
-          <div className="sobre-texto">
-            <h2>{sobre.titulo}</h2>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: sobre.texto.replace(/\n/g, "<br />"),
-              }}
-            />
-          </div>
-        </section>
-      )}
     </div>
   );
 }
