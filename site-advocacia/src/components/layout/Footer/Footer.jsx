@@ -65,7 +65,7 @@ function Footer() {
           <p>
             Rua Volutário Otto Gomes Martins, 1202
             <br />
-            Sertãozinho, SP, 12345-678
+            Sertãozinho, SP, 14160-730
           </p>
           <p>
             <strong>Email:</strong> silviapereiraadvogados@gmail.com
