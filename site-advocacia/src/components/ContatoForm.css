@@ -83,3 +83,9 @@
 .form-group input[type="tel"] {
   height: 48px; /* Altura explícita - pode ajustar este valor */
 }
+
+.error-message {
+  color: #ff4d4d; /* Um tom de vermelho */
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
