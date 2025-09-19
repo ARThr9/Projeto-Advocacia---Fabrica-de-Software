@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { supabase } from "./supabaseClient";
@@ -19,6 +21,9 @@ import AdminPage from "./pages/Admin/AdminPage";
 import EditServicoPage from "./pages/Admin/EditServicoPage";
 import AdminSobrePage from "./pages/Admin/AdminSobrePage";
 import AdminCertificadosPage from "./pages/Admin/AdminCertificadosPage";
+
+// 1. IMPORTADO O NOVO COMPONENTE DE PROTEÇÃO
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
 
@@ -80,33 +85,22 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/certificados" element={<CertificadosPage />} />
 
-          {/* --- Rotas de Admin Protegidas --- */}
-          <Route
-            path="/admin"
-            element={session ? <AdminPage session={session} /> : <LoginPage />}
-          />
-          <Route
-            path="/admin/edit/:id"
-            element={
-              session ? <EditServicoPage session={session} /> : <LoginPage />
-            }
-          />
-          <Route
-            path="/admin/sobre"
-            element={
-              session ? <AdminSobrePage session={session} /> : <LoginPage />
-            }
-          />
-          <Route
-            path="/admin/certificados"
-            element={
-              session ? (
-                <AdminCertificadosPage session={session} />
-              ) : (
-                <LoginPage />
-              )
-            }
-          />
+          {/* --- Rotas de Admin Protegidas (REATIVADAS) --- */}
+          <Route element={<ProtectedRoute session={session} />}>
+            <Route path="/admin" element={<AdminPage session={session} />} />
+            <Route
+              path="/admin/edit/:id"
+              element={<EditServicoPage session={session} />}
+            />
+            <Route
+              path="/admin/sobre"
+              element={<AdminSobrePage session={session} />}
+            />
+            <Route
+              path="/admin/certificados"
+              element={<AdminCertificadosPage session={session} />}
+            />
+          </Route>
         </Routes>
       </main>
       <Footer />

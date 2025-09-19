@@ -90,7 +90,7 @@ function CertificadosPage() {
 
   return (
     <div className="certificados-container">
-      <h1>Certificados e Diplomas</h1>
+      <h1>Certificações e Diplomas</h1>
       <p className="certificados-subtitle">
         Confira as qualificações e especializações.
       </p>

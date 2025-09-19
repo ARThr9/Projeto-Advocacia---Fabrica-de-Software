@@ -179,6 +179,7 @@
 @media (max-width: 768px) {
   .hero-section {
     flex-direction: column;
+    background-color: transparent;
     text-align: center;
   }
   .hero-content {

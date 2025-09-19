@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
-import AddServico from "../../components/AddServico";
-import ListaServicos from "../../components/ListaServicos";
+import ListaServicos from "../../components/ListaServicos"; // Apenas esta importação é necessária
 
 function AdminPage({ session }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [servicos, setServicos] = useState([]);
 
+  // Estados do formulário
   const [uploading, setUploading] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [descricaoDetalhada, setDescricaoDetalhada] = useState(""); // NOVO ESTADO
+  const [descricaoDetalhada, setDescricaoDetalhada] = useState("");
   const [imagem, setImagem] = useState(null);
 
   const getServicos = useCallback(async () => {
@@ -71,7 +71,6 @@ function AdminPage({ session }) {
       if (insertError) throw insertError;
 
       alert("Serviço adicionado com sucesso!");
-      // Limpar todos os campos
       setTitulo("");
       setDescricao("");
       setDescricaoDetalhada("");
@@ -108,6 +107,10 @@ function AdminPage({ session }) {
     navigate("/");
   };
 
+  if (loading) {
+    return <div>Carregando painel de administração...</div>;
+  }
+
   return (
     <div>
       <h1>Área Administrativa</h1>
@@ -116,7 +119,7 @@ function AdminPage({ session }) {
         <Link to="/admin/certificados">Gerenciar Certificações</Link> |{" "}
         <Link to="/admin/sobre">Gerenciar "Sobre"</Link>
       </nav>
-      <p>Bem-vindo, {session.user.email}!</p>
+      <p>Bem-vindo, {session?.user?.email}!</p>
       <button onClick={handleLogout}>Sair (Logout)</button>
       <hr />
 
@@ -166,7 +169,6 @@ function AdminPage({ session }) {
       </form>
       <hr />
 
-      {/* <h2>Serviços Prestados</h2> */}
       <ListaServicos
         servicos={servicos}
         loading={loading}

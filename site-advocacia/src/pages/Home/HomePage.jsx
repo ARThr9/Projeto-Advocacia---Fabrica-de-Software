@@ -32,8 +32,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="homepage">
-      {/* --- Seção Hero --- */}
+    <>
       <section className="hero-section">
         <div className="hero-image">
           <img
@@ -81,7 +80,7 @@ function HomePage() {
           </div>
         )}
       </section>
-    </div>
+    </>
   );
 }
 

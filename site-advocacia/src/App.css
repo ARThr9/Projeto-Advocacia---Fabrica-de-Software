@@ -1,4 +1,17 @@
-/* src/App.css */
+/* src/App.css (VERSÃO CORRIGIDA) */
+
+/* --- Estilo de Fundo Global --- */
+body {
+  background-image: linear-gradient(
+      rgba(18, 18, 18, 0.85),
+      rgba(18, 18, 18, 0.85)
+    ),
+    url("https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Background%20Image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
 
 /* --- Layout Principal --- */
 .App {
@@ -6,9 +19,14 @@
 }
 
 main {
-  padding-top: 80px;
-  padding-left: 50px;
-  padding-right: 50px;
+  /* Este padding cria o container centralizado */
+  padding-top: 85px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  /* Adicionado para garantir que o conteúdo fique dentro de um limite legível */
+  max-width: 1700px;
+  margin: 0 auto;
 }
 
 hr {
@@ -17,12 +35,13 @@ hr {
   margin: 2rem 0;
 }
 
+/* --- O RESTO DO SEU CSS CONTINUA IGUAL --- */
+
 /* --- Navegação (Menu de Admin) --- */
 nav {
   padding: 1rem 0;
   margin-bottom: 1rem;
 }
-
 nav a {
   font-weight: 500;
   color: var(--cor-primaria);
@@ -30,7 +49,6 @@ nav a {
   margin: 0 10px;
   transition: color 0.2s;
 }
-
 nav a:hover {
   color: #8c92ff;
 }
@@ -41,7 +59,6 @@ h1 {
   line-height: 1.1;
   margin-bottom: 1rem;
 }
-
 h2 {
   font-size: 1.8em;
   margin-bottom: 1rem;
@@ -63,11 +80,9 @@ button {
   cursor: pointer;
   transition: border-color 0.25s, background-color 0.25s;
 }
-
 button:hover {
   background-color: #535bf2;
 }
-
 button:disabled {
   background-color: var(--cor-borda);
   cursor: not-allowed;
@@ -84,22 +99,17 @@ form {
   border: 1px solid var(--cor-borda);
   text-align: left;
 }
-
 .form-group {
   margin-bottom: 0.5rem;
 }
-
-/* Estilo para colocar campos lado a lado */
 .form-group-inline {
   display: flex;
   gap: 1rem;
   align-items: flex-end;
 }
-
 .form-group-inline .form-group {
   flex: 1;
 }
-
 form label {
   display: block;
   margin-bottom: 0.5rem;
@@ -107,7 +117,6 @@ form label {
   color: var(--cor-texto-fraco);
   font-size: 0.9rem;
 }
-
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
@@ -123,7 +132,6 @@ form textarea {
   font-size: 1em;
   box-sizing: border-box; /* Garante consistência no tamanho */
 }
-
 form input[type="file"] {
   padding: 0.5rem;
   border: 1px solid var(--cor-borda);
@@ -138,7 +146,6 @@ ul {
   padding: 0;
   text-align: left;
 }
-
 li {
   background-color: var(--cor-fundo-card);
   padding: 1.5rem;
@@ -146,12 +153,10 @@ li {
   border: 1px solid var(--cor-borda);
   margin-bottom: 1rem;
 }
-
 li h3 {
   font-size: 1.2em;
   color: var(--cor-primaria);
 }
-
 li p {
   color: var(--cor-texto-fraco);
   margin: 0.5rem 0 1rem 0;
