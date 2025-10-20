@@ -90,3 +90,19 @@
   border-top: 1px solid var(--cor-borda);
   font-size: 0.9rem;
 }
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* Empilha as colunas */
+    align-items: center; /* Centraliza os blocos de coluna */
+  }
+
+  .footer-column {
+    /* Garante que o texto de todas as colunas fique centralizado no celular */
+    text-align: center;
+  }
+
+  .footer-column h3 {
+    text-align: center;
+  }
+}
