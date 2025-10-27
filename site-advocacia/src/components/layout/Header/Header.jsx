@@ -2,41 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-// Componentes SVG para os ícones
-const IconeMenu = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <line x1="3" y1="12" x2="21" y2="12"></line>
-    <line x1="3" y1="6" x2="21" y2="6"></line>
-    <line x1="3" y1="18" x2="21" y2="18"></line>
-  </svg>
-);
-
-const IconeFechar = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <line x1="18" y1="6" x2="6" y2="18"></line>
-    <line x1="6" y1="6" x2="18" y2="18"></line>
-  </svg>
-);
+// REMOVEMOS os componentes IconeMenu e IconeFechar
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,9 +16,17 @@ function Header() {
       <header className="main-header">
         <div className="header-content">
           <div className="header-left">
-            <button onClick={toggleMenu} className="menu-toggle">
-              {isMenuOpen ? <IconeFechar /> : <IconeMenu />}
+            {/* ===== ESTA É A MUDANÇA PRINCIPAL NO JSX ===== */}
+            <button
+              onClick={toggleMenu}
+              className={`menu-toggle ${isMenuOpen ? "is-active" : ""}`}
+              aria-label="Menu"
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
             </button>
+            {/* ============================================== */}
           </div>
 
           <div className="header-center">
@@ -60,14 +34,14 @@ function Header() {
               <img
                 src="https://skkyfidccddnqzsroxzr.supabase.co/storage/v1/object/public/imagens-servicos/Logo%20Advocacia%20Header.jpg"
                 alt="Logo da Advocacia"
-                className="logo-image" /* <<< CORRIGIDO AQUI */
+                className="logo-image"
               />
             </Link>
           </div>
 
           <div className="header-right">
             <a
-              href="https://wa.me/551639459066" // Lembre-se de colocar o número aqui
+              href="https://wa.me/551639459066"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-button"
@@ -78,6 +52,7 @@ function Header() {
         </div>
       </header>
 
+      {/* O menu overlay continua exatamente o mesmo */}
       <div className={`overlay-menu ${isMenuOpen ? "open" : ""}`}>
         <nav className="overlay-nav">
           <Link to="/" onClick={toggleMenu}>

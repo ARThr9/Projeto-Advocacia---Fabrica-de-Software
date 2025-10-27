@@ -35,24 +35,6 @@ hr {
   margin: 2rem 0;
 }
 
-/* --- O RESTO DO SEU CSS CONTINUA IGUAL --- */
-
-/* --- Navegação (Menu de Admin) --- */
-nav {
-  padding: 1rem 0;
-  margin-bottom: 1rem;
-}
-nav a {
-  font-weight: 500;
-  color: var(--cor-primaria);
-  text-decoration: none;
-  margin: 0 10px;
-  transition: color 0.2s;
-}
-nav a:hover {
-  color: #8c92ff;
-}
-
 /* --- Títulos (Painel de Admin) --- */
 h1 {
   font-size: 2.5em;

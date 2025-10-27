@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #242424; /* Cor de fundo escura */
+  background-color: #242424;
   border-bottom: 1px solid var(--cor-borda);
   z-index: 1000;
   padding: 0 2rem;
@@ -40,28 +40,10 @@
   justify-content: center;
 }
 
-/* Estilo para a imagem da Logo */
 .logo-image {
   height: 60px;
   width: auto;
   display: block;
-}
-
-/* --- Botões e Links --- */
-.menu-toggle {
-  background: none;
-  border: none;
-  color: var(--cor-texto);
-  cursor: pointer;
-  padding: 0;
-
-  outline: none;
-
-  transition: transform 0.2s ease;
-}
-
-.menu-toggle:hover {
-  transform: translateY(-2px);
 }
 
 .whatsapp-button {
@@ -76,6 +58,85 @@
 
 .whatsapp-button:hover {
   background-color: #128c7e;
+}
+
+.menu-toggle {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  position: relative;
+  transition: transform 0.2s ease;
+  /* z-index: 1001; */
+}
+
+.menu-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.hamburger-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 30px;
+  height: 3px;
+  background-color: var(--cor-texto);
+  border-radius: 4px;
+  position: absolute;
+  transition: transform 0.25s ease-in-out, opacity 0.2s ease;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block;
+}
+
+.hamburger-inner::before {
+  top: -10px;
+}
+
+.hamburger-inner::after {
+  bottom: -10px;
+}
+
+/* 3. A MÁGICA DA ANIMAÇÃO (quando a classe .is-active é adicionada) */
+
+/* Gira a linha do meio, mas a torna transparente */
+.menu-toggle.is-active .hamburger-inner {
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+
+/* Move a linha de cima para o meio e gira */
+.menu-toggle.is-active .hamburger-inner::before {
+  transform: translateY(10px) rotate(90deg);
+  background-color: white; /* Garante que a cor do "X" seja branca */
+}
+
+/* Move a linha de baixo para o meio e gira */
+.menu-toggle.is-active .hamburger-inner::after {
+  transform: translateY(-10px) rotate(0deg);
+  background-color: white; /* Garante que a cor do "X" seja branca */
 }
 
 /* --- Estilos do Menu Overlay (sem alterações) --- */

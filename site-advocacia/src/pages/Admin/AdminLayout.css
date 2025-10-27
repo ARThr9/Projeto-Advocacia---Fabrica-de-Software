@@ -1,0 +1,214 @@
+/* src/pages/Admin/AdminLayout.css */
+
+/* Remove o padding lateral da tag <main> que vem do App.css */
+main {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Um container geral para todas as páginas de admin */
+.admin-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem; /* Adiciona o padding de volta, mas dentro do container */
+}
+
+/* A "Caixa Menor" que você sugeriu! */
+.admin-content-box {
+  max-width: 800px; /* Limita a largura do formulário/lista */
+  margin: 2rem auto; /* Centraliza a caixa na página */
+  padding: 2.5rem;
+  background-color: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+}
+
+/* Estilo padronizado para os títulos das caixas */
+.admin-content-box h2 {
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 1rem;
+  margin-top: 0;
+}
+
+/* --- NOVOS BOTÕES DO ADMIN --- */
+
+/* Botão Primário (Dourado/Amarelo) */
+.btn-admin-primary {
+  background-color: #e9c54d; /* O tom de dourado da sua logo */
+  color: #242424; /* Texto escuro fica melhor em fundo dourado */
+  font-weight: 600;
+  border: none;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-admin-primary:hover {
+  background-color: #f0d06d;
+  transform: translateY(-2px);
+}
+
+/* Botão Secundário (Prata/Cinza para Excluir/Editar) */
+.btn-admin-secondary {
+  background-color: #777;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-admin-secondary:hover {
+  background-color: #999;
+}
+
+/* Ajuste para botões de "Excluir" (vermelho) */
+.btn-admin-danger {
+  background-color: #b91c1c;
+  color: white;
+}
+.btn-admin-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Faz os botões da lista de admin ficarem lado a lado */
+.admin-list-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem; /* Adiciona um bom espaçamento entre os campos */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--cor-texto-fraco);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Garante que os inputs e textareas ocupem 100% da caixa */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box; /* Impede que o padding "estoure" a caixa */
+}
+
+.btn-admin-primary,
+.btn-admin-secondary {
+  display: inline-block; /* Permite que padding e margin funcionem em tags <Link> */
+  text-decoration: none; /* Remove o sublinhado do link */
+  text-align: center;
+}
+
+/* src/pages/Admin/AdminLayout.css - ADICIONAR NO FINAL */
+
+/* --- Estilo da Navegação do Admin --- */
+.admin-page-container nav {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: center;
+}
+
+.admin-page-container nav a {
+  font-weight: 500;
+  color: #e9c54d; /* <-- COR DOURADA/AMARELA */
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.admin-page-container nav a:hover {
+  color: white; /* Efeito hover para branco */
+}
+
+/* --- Layout para Lista de Cards (Certificados) --- */
+.admin-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.admin-card-item {
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 220px; /* Um pouco mais largo para as imagens */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-card-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--cor-borda);
+  background-color: #333;
+}
+
+.admin-card-item p {
+  font-weight: 500;
+  color: var(--cor-texto);
+  flex-grow: 1; /* Empurra o botão para baixo */
+  margin: 0.5rem 0;
+}
+
+/* --- Layout para Lista de Blocos (Página Sobre) --- */
+.admin-bloco-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.admin-bloco-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background-color: var(--cor-fundo);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  margin-bottom: 1.5rem;
+}
+
+.admin-bloco-info {
+  flex: 1; /* Ocupa a maior parte do espaço */
+}
+
+.admin-bloco-info p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+  color: var(--cor-texto-fraco);
+}
+
+.admin-bloco-info p strong {
+  color: var(--cor-texto);
+}
+
+.admin-bloco-image img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--cor-borda);
+  background-color: #333;
+}

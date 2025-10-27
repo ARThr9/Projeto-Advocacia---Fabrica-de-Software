@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
-import ListaServicos from "../../components/ListaServicos"; // Apenas esta importação é necessária
+import ListaServicos from "../../components/ListaServicos";
+import "./AdminLayout.css";
 
 function AdminPage({ session }) {
   const navigate = useNavigate();
@@ -112,7 +113,8 @@ function AdminPage({ session }) {
   }
 
   return (
-    <div>
+    // Container geral da página de admin
+    <div className="admin-page-container">
       <h1>Área Administrativa</h1>
       <nav>
         <Link to="/admin">Gerenciar Serviços</Link> |{" "}
@@ -123,57 +125,83 @@ function AdminPage({ session }) {
       <button onClick={handleLogout}>Sair (Logout)</button>
       <hr />
 
-      <form onSubmit={handleAddServico}>
-        <h2>Adicionar Novo Serviço</h2>
-        <label htmlFor="titulo-add">Título do Serviço</label>
-        <input
-          id="titulo-add"
-          type="text"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-          required
+      {/* Caixa Menor para o Formulário - AGORA COMPLETO */}
+      <div className="admin-content-box">
+        <form onSubmit={handleAddServico}>
+          <h2>Adicionar Novo Serviço</h2>
+
+          {/* --- Título do Serviço --- */}
+          <div className="form-group">
+            <label htmlFor="titulo-add">Título do Serviço</label>
+            <input
+              id="titulo-add"
+              type="text"
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* --- Descrição Curta --- */}
+          <div className="form-group">
+            <label htmlFor="descricao-add">
+              Descrição Curta (para Homepage)
+            </label>
+            <textarea
+              id="descricao-add"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+              required
+              rows="3"
+            />
+          </div>
+
+          {/* --- Descrição Detalhada --- */}
+          <div className="form-group">
+            <label htmlFor="descricao-detalhada-add">
+              Descrição Detalhada (para página de Áreas de Atuação)
+            </label>
+            <textarea
+              id="descricao-detalhada-add"
+              value={descricaoDetalhada}
+              onChange={(e) => setDescricaoDetalhada(e.target.value)}
+              required
+              rows="7"
+            />
+          </div>
+
+          {/* --- Imagem --- */}
+          <div className="form-group">
+            <label htmlFor="imagem-input-add">Imagem</label>
+            <input
+              type="file"
+              id="imagem-input-add"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
+            />
+          </div>
+
+          {/* --- Botão Salvar --- */}
+          <button
+            type="submit"
+            disabled={uploading}
+            className="btn-admin-primary"
+          >
+            {uploading ? "Salvando..." : "Salvar Serviço"}
+          </button>
+        </form>
+      </div>
+
+      {/* Caixa Menor para a Lista */}
+      <div className="admin-content-box">
+        {/* <h2>Serviços Prestados</h2> */}
+        <ListaServicos
+          servicos={servicos}
+          loading={loading}
+          onDelete={handleDeleteServico}
         />
-
-        <label htmlFor="descricao-add">Descrição Curta (para Homepage)</label>
-        <textarea
-          id="descricao-add"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          required
-          rows="3"
-        />
-
-        <label htmlFor="descricao-detalhada-add">
-          Descrição Detalhada (para página de Áreas de Atuação)
-        </label>
-        <textarea
-          id="descricao-detalhada-add"
-          value={descricaoDetalhada}
-          onChange={(e) => setDescricaoDetalhada(e.target.value)}
-          required
-          rows="7"
-        />
-
-        <label htmlFor="imagem-input-add">Imagem</label>
-        <input
-          type="file"
-          id="imagem-input-add"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-
-        <button type="submit" disabled={uploading}>
-          {uploading ? "Salvando..." : "Salvar Serviço"}
-        </button>
-      </form>
-      <hr />
-
-      <ListaServicos
-        servicos={servicos}
-        loading={loading}
-        onDelete={handleDeleteServico}
-      />
+      </div>
     </div>
   );
 }
