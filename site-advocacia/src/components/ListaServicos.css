@@ -50,3 +50,24 @@
   flex-grow: 1; /* Empurra os botões para baixo */
   line-height: 1.5;
 }
+
+@media (max-width: 768px) {
+  .admin-list-item {
+    flex-direction: column; /* Empilha a imagem e o conteúdo */
+    gap: 1rem;
+  }
+
+  .admin-list-item-image img {
+    width: 100%; /* Faz a imagem ocupar a largura total do card */
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .admin-list-item-content {
+    height: auto; /* Reseta a altura */
+  }
+
+  .admin-list-item-content p {
+    flex-grow: 0; /* Reseta o flex-grow */
+  }
+}

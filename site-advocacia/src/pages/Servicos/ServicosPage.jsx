@@ -50,7 +50,6 @@ function ServicosPage() {
                 </div>
                 <div className="servico-detalhe-texto">
                   <h2>{servico.titulo}</h2>
-                  {/* ALTERAÇÃO PRINCIPAL AQUI: Usamos a descrição detalhada */}
                   <p
                     dangerouslySetInnerHTML={{
                       __html: (

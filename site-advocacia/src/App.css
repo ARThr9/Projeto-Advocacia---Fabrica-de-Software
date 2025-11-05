@@ -1,5 +1,8 @@
-/* src/App.css (VERSÃO CORRIGIDA) */
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 /* --- Estilo de Fundo Global --- */
 body {
   background-image: linear-gradient(
@@ -11,6 +14,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* --- Layout Principal --- */
@@ -142,4 +146,12 @@ li h3 {
 li p {
   color: var(--cor-texto-fraco);
   margin: 0.5rem 0 1rem 0;
+}
+
+@media (max-width: 768px) {
+  main {
+    /* Diminui o padding lateral em telas de celular */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }

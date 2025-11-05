@@ -1,4 +1,4 @@
-/* src/components/Header.css */
+/* src/components/Header.css (VERSÃO CORRIGIDA FINAL) */
 
 .main-header {
   position: fixed;
@@ -46,7 +46,8 @@
   display: block;
 }
 
-.whatsapp-button {
+/* 1. Botão de WhatsApp do Desktop */
+.whatsapp-button-desktop {
   background-color: #25d366;
   color: white;
   padding: 0.6em 1.2em;
@@ -56,9 +57,13 @@
   transition: background-color 0.3s;
 }
 
-.whatsapp-button:hover {
+.whatsapp-button-desktop:hover {
   background-color: #128c7e;
 }
+
+/* ======================================= */
+/* --- ÍCONE E ANIMAÇÃO HAMBÚRGUER --- */
+/* ======================================= */
 
 .menu-toggle {
   background: transparent !important;
@@ -71,7 +76,7 @@
   width: 32px;
   position: relative;
   transition: transform 0.2s ease;
-  /* z-index: 1001; */
+  z-index: 1001;
 }
 
 .menu-toggle:hover {
@@ -88,18 +93,25 @@
   display: inline-block;
 }
 
+/* ======================================================== */
+/* --- CORREÇÃO DO "X" PERMANENTE ESTÁ AQUI --- */
+/* ======================================================== */
+
+/* 2. ESTILOS BASE CORRIGIDOS (as 3 linhas) */
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
   width: 30px;
   height: 3px;
-  background-color: var(--cor-texto);
+  background-color: var(--cor-texto); /* Cor da linha */
   border-radius: 4px;
   position: absolute;
-  transition: transform 0.25s ease-in-out, opacity 0.2s ease;
+  transition: transform 0.25s ease-in-out, opacity 0.2s ease,
+    background-color 0.25s ease-in-out;
 }
 
 .hamburger-inner {
+  /* Linha do meio */
   display: block;
   top: 50%;
   transform: translateY(-50%);
@@ -112,34 +124,36 @@
 }
 
 .hamburger-inner::before {
+  /* Linha de cima */
   top: -10px;
 }
 
 .hamburger-inner::after {
+  /* Linha de baixo */
   bottom: -10px;
 }
 
-/* 3. A MÁGICA DA ANIMAÇÃO (quando a classe .is-active é adicionada) */
+/* 3. ESTILOS DA ANIMAÇÃO "X" (quando a classe .is-active é adicionada) */
 
-/* Gira a linha do meio, mas a torna transparente */
+/* Gira a linha do meio e a torna transparente */
 .menu-toggle.is-active .hamburger-inner {
   transform: rotate(45deg);
-  background-color: transparent;
+  background-color: transparent; /* A linha do meio some */
 }
 
 /* Move a linha de cima para o meio e gira */
 .menu-toggle.is-active .hamburger-inner::before {
   transform: translateY(10px) rotate(90deg);
-  background-color: white; /* Garante que a cor do "X" seja branca */
+  background-color: white;
 }
 
 /* Move a linha de baixo para o meio e gira */
 .menu-toggle.is-active .hamburger-inner::after {
   transform: translateY(-10px) rotate(0deg);
-  background-color: white; /* Garante que a cor do "X" seja branca */
+  background-color: white;
 }
 
-/* --- Estilos do Menu Overlay (sem alterações) --- */
+/* --- Estilos do Menu Overlay --- */
 .overlay-menu {
   position: fixed;
   top: 0;
@@ -160,6 +174,10 @@
   transform: translateY(0);
 }
 
+/* ======================================================== */
+/* --- CORREÇÃO DOS LINKS INVISÍVEIS ESTÁ AQUI --- */
+/* ======================================================== */
+
 .overlay-nav {
   display: flex;
   flex-direction: column;
@@ -168,7 +186,7 @@
 }
 
 .overlay-nav a {
-  color: var(--cor-texto);
+  color: #ffffff; /* 4. FORÇANDO A COR PARA BRANCO */
   text-decoration: none;
   font-size: 2.5rem;
   font-weight: 500;
@@ -177,4 +195,113 @@
 
 .overlay-nav a:hover {
   color: #e9c54d;
+}
+
+/* --- BOTÃO FLUTUANTE (FAB) --- */
+.whatsapp-fab {
+  background-color: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 900;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  display: none; /* Escondido no desktop */
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+}
+
+/* --- LÓGICA DE RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+  /* Esconde o botão do header no celular */
+  .whatsapp-button-desktop {
+    display: none;
+  }
+
+  /* Mostra o botão flutuante no celular */
+  .whatsapp-fab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* --- POPUP DO WHATSAPP --- */
+.whatsapp-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 90%;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content p {
+  color: #222;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.popup-confirm {
+  background-color: #25d366;
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  flex: 1;
+  transition: background 0.3s;
+}
+
+.popup-confirm:hover {
+  background-color: #128c7e;
+}
+
+.popup-cancel {
+  background-color: #ccc;
+  border: none;
+  color: #222;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  flex: 1;
+  transition: background 0.3s;
+}
+
+.popup-cancel:hover {
+  background-color: #999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
