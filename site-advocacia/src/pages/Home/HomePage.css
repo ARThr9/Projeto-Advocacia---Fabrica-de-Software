@@ -29,8 +29,8 @@
 .hero-button {
   display: inline-block;
   padding: 0.8rem 2.5rem;
-  background-color: #e9c54d;
-  color: white;
+  background-color: #d4a017;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   border: none;
   border-radius: 50px;
@@ -42,7 +42,7 @@
 }
 
 .hero-button:hover {
-  background-color: #e9c54d;
+  background-color: #d4a017;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
@@ -138,8 +138,8 @@
   transition: all 0.3s ease;
 
   /* Estado inicial (botão preenchido e sempre visível) */
-  background-color: #e9c54d;
-  color: white; /* Texto branco e visível */
+  background-color: #d4a017;
+  color: rgb(0, 0, 0); /* Texto branco e visível */
 
   /* Alinhamento no fundo do card */
   margin-top: auto;
@@ -148,7 +148,7 @@
 
 .servico-card-content a:hover {
   /* Efeito ao passar o mouse */
-  background-color: #e9c54d; /* Um pouco mais escuro */
+  background-color: #d4a017; /* Um pouco mais escuro */
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

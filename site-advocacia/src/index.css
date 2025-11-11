@@ -5,13 +5,12 @@
   --cor-fundo: #1a1a1a;
   --cor-fundo-card: #242424;
   --cor-borda: #444;
-  --cor-primaria: #646cff;
-  --cor-texto: rgba(255, 255, 255, 0.87);
+  --cor-primaria: #ffffff;
+  --cor-texto: #dcdcdc;
   --cor-texto-fraco: #888;
-  --cor-menu-overlay: #2d2a32; /* <-- ADICIONE ESTA LINHA */
+  --cor-menu-overlay: #1a1a1a;
 }
 
-/* 2. Reset básico e definição da fonte */
 * {
   margin: 0;
   padding: 0;

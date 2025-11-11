@@ -53,6 +53,11 @@ function AdminSobrePage({ session }) {
       setUploading(true);
       let imageUrl = null;
 
+      if (!imagem) {
+        alert("Por favor, selecione uma imagem.");
+        return;
+      }
+
       if (imagem) {
         const filePath = `public/sobre/${Date.now()}-${imagem.name}`;
         const { error: uploadError } = await supabase.storage
